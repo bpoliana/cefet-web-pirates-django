@@ -20,10 +20,10 @@
         {% for tesouro in lista_tesouros %}
         <tr>
           <td><img src="{% static "imgs/exemplo-de-icone.png" %}"></td>
-          <td>{ tesouro.nome }</td>
-          <td>{ tesouro.preco }</td>
-          <td>{ tesouro.quantidade }</td>
-          <td>{ tesouro.total }</td>
+          <td>{{ tesouro.nome }}</td>
+          <td>{{ tesouro.preco }}</td>
+          <td>{{ tesouro.quantidade }}</td>
+          <td>{{ tesouro.total }}</td>
           <td><img src="" alt="editar"></td>
           <td><img src="" alt="Deletar"></td>
         </tr>
@@ -32,7 +32,7 @@
       <tfoot>
         <tr>
           <td colspan="4">Total geral</td>
-          <td>{ total_geral }</td>
+          <td>{{ total_geral }}</td>
           <td colspan="2"></td>
         </tr>
       </tfoot>

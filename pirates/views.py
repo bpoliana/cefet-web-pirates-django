@@ -4,11 +4,11 @@ from django.db.models import F, ExpressionWrapper, DecimalField, Sum
 from . import models
 
 class ListaTesourosView(View):
-	def get(self, request):
+    def get(self, request):
         lista_tesouros = models.Tesouro.objects.annotate(
             total = ExpressionWrapper( F('preco') * F('quantidade'),
-						                output_field = DecimalField(max_digits = 10, decimal_places = 2, blank = True )
-            		)
+                                        output_field = DecimalField(max_digits = 10, decimal_places = 2, blank = True )
+                    )
         ).all()
         
         return render(

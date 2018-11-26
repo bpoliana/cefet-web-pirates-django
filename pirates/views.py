@@ -17,14 +17,22 @@ class ListaTesourosView(View):
             context = dict( lista_tesouros = lista_tesouros, total_geral=lista_tesouros.aggregate(Sum('total'))['total__sum'] )
         )
 
-class SalvarTesourosView(View):
-    form = forms.TesouroForm(request.POST, request.FILES)
-    if form.is_valid():
-        form.save()
-        return redirect('list')
-    return render(request, template_name='salvar_tesouro.html', context=dict(form=form))
+class SalvarTesouroView(View):
+    def get(self, request, tr=None)
+        form = forms.TesouroForm()
+        if tr:
+            form = forms.TesouroForm(instance=models.Tesouro.objects.get(tr=tr))
+        return render(request, template_name='salvar_tesouro.html', context=dict(form=form,action=f'/edit/{tr]' if tr else 'new'))
 
-class DeletarTesourouView(view):
+
+    def post(self, request, tr=None)
+        form = forms.TesouroForm(request.POST, request.FILES, instance=models.Tesouro.objects.get(tr=tr) if tr else None)
+        if form.is_valid():
+            form.save()
+            return redirect('list')
+        return render(request, template_name='salvar_tesouro.html', context=dict(form=form), action=f'/edit/{tr]' if tr else 'new')
+
+class DeletarTesouroView(view):
     def get(self, request, tr=None):
         models.Tesouro.objects.get(tr=tr).delete()
         return redirect('list')
